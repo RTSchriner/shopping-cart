@@ -79,10 +79,10 @@ app.put('/items/:id', jsonParser, function (req, res) {
      }
      
      if (i == length) {
-          //res.status(400).json({ error: 'Sorry, that ID does not exist.' });
           var new_name = req.body.name;
-          var new_item = {name: new_name, id: id};     
-          items.items.push(new_item);   
+          var new_item = {name: new_name, id: Number(id)};     
+          items.items.push(new_item);
+          res.status(201).json(new_item);
           
      } else {
           res.status(201).json(updated);
@@ -93,3 +93,6 @@ app.put('/items/:id', jsonParser, function (req, res) {
 
 
 app.listen(process.env.PORT || 8080);
+
+exports.app = app;
+exports.items = items;
